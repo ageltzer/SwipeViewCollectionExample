@@ -1,7 +1,5 @@
-﻿using System;
-using SingleSwipeCollectionExample.Pages;
+﻿using SingleSwipeCollectionExample.Pages;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace SingleSwipeCollectionExample
 {
@@ -11,7 +9,7 @@ namespace SingleSwipeCollectionExample
         {
             InitializeComponent();
 
-            MainPage = new SwipeViewCollectionPage();
+            MainPage = new NavigationPage(new SwipeViewCollectionPage());
         }
 
         protected override void OnStart()

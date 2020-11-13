@@ -3,10 +3,11 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:SingleSwipeCollectionExample.ViewModels"
-    x:Class="SingleSwipeCollectionExample.Views.SwipeViewCollectionPage">
+    x:Class="SingleSwipeCollectionExample.Pages.SwipeViewCollectionPage">
     <ContentPage.BindingContext>
         <viewmodels:SwipeViewCollectionViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
+        <Label Text="Test"/>
     </ContentPage.Content>
 </ContentPage>
