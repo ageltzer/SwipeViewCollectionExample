@@ -2,12 +2,52 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewmodels="clr-namespace:SingleSwipeCollectionExample.ViewModels"
+    xmlns:viewModels="clr-namespace:SingleSwipeCollectionExample.ViewModels"
+    xmlns:views="clr-namespace:SingleSwipeCollectionExample.Views"
+    Title="SwipeView Collection Example"
     x:Class="SingleSwipeCollectionExample.Pages.SwipeViewCollectionPage">
     <ContentPage.BindingContext>
-        <viewmodels:SwipeViewCollectionViewModel/>
+        <viewModels:SwipeViewCollectionViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Label Text="Test"/>
+        <CollectionView
+            ItemsSource="{Binding Persons}"
+            SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout
+                    Orientation="Vertical"
+                    ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView>
+                        <views:CustomSwipeView
+                            Margin="8"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:SwipeViewCollectionViewModel}}, Path=OpenItemChangedCommand}"
+                            CommandParameter="{Binding .}"
+                            IsOpen="{Binding IsOpen}">
+                            <views:CustomSwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItemView
+                                        CommandParameter="{Binding .}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:SwipeViewCollectionViewModel}}, Path=DeletePersonCommand}">
+                                        <Frame
+                                            HasShadow="False"
+                                            BackgroundColor="Red">
+                                            <Label Text="Delete" TextColor="White"/>
+                                        </Frame>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </views:CustomSwipeView.RightItems>
+                            <Frame
+                                HasShadow="False"
+                                BackgroundColor="LightGray">
+                                <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
+                            </Frame>
+                        </views:CustomSwipeView>
+                    </ContentView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </ContentPage.Content>
 </ContentPage>

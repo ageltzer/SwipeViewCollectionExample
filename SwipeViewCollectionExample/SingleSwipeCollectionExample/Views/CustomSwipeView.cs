@@ -16,6 +16,7 @@ namespace SingleSwipeCollectionExample.Views
             typeof(bool),
             typeof(CustomSwipeView),
             false,
+            BindingMode.TwoWay,
             propertyChanged: IsOpenPropertyChanged);
 
         public bool IsOpen

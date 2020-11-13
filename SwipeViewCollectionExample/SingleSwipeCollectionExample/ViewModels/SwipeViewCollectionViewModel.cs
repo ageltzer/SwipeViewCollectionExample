@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using SingleSwipeCollectionExample.Models;
 using Xamarin.Forms;
@@ -38,6 +39,22 @@ namespace SingleSwipeCollectionExample.ViewModels
 
         private Command<Person> _deletePersonCommand;
         public Command<Person> DeletePersonCommand => _deletePersonCommand ??= new Command<Person>((person) => Persons.Remove(person));
+
+        private Command<Person> _openItemChangedCommand;
+        public Command<Person> OpenItemChangedCommand => _openItemChangedCommand ??= new Command<Person>(ChangeOpenPersonItem);
+        private void ChangeOpenPersonItem(Person swipedPersonItem)
+        {
+            if (swipedPersonItem != null && swipedPersonItem.IsOpen)
+            {
+                if (Persons.Count < 2)
+                    return;
+
+                foreach (var person in Persons.Where(x => x != swipedPersonItem && x.IsOpen))
+                {
+                    person.IsOpen = false;
+                }
+            }
+        }
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
