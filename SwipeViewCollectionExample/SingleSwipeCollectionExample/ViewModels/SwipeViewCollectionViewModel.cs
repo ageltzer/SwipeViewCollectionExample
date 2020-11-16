@@ -46,7 +46,7 @@ namespace SingleSwipeCollectionExample.ViewModels
         {
             if (swipedPersonItem != null && swipedPersonItem.IsOpen)
             {
-                if (Persons.Count < 2)
+                if (Persons.Count < 2 || Persons.Select(x => x.IsOpen).Count() < 2)
                     return;
 
                 foreach (var person in Persons.Where(x => x != swipedPersonItem && x.IsOpen))
